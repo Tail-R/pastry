@@ -1,0 +1,50 @@
+* {
+    all: unset;
+    font-family: "azukifontB";
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#v_box {
+    min-width: 52px;
+    
+    background-color: #ffffff;
+}
+
+#bt_1,
+#bt_2,
+#bt_3,
+#bt_4 {
+    min-width: 34px;
+    min-height: 34px;
+
+    background-image: url('/home/tailr/Pictures/cake.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    margin: 8px 4px 8px 4px;
+}
+
+#buttons {
+    padding: 8px 4px 0px 4px;
+}
+
+#bat {
+    color: #ee8888;
+    
+    padding: 8px 0px 8px 0px;
+}
+
+#sep {
+    min-height: 4px;
+    
+    background-color: #ffcccc;
+    border-radius: 2px;
+    margin: 0px 16px 0px 16px;
+}
+
+#date {
+    color: #ee8888;
+    
+    padding: 8px 0px 12px 0px;
+}
