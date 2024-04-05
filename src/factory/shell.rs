@@ -13,7 +13,7 @@ use futures::executor::block_on;
 use gtk::glib;
 use gtk::prelude::*;
 
-fn exec_once(command: &str) -> String {
+pub fn exec_once(command: &str) -> String {
     let mut shell = Command::new("sh");
     let cmd = shell.arg("-c").arg(command);
 

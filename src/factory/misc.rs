@@ -4,6 +4,7 @@ use crate::widgets::{
 
 use gtk::prelude::*;
 use gtk::Orientation::*;
+use gtk::gdk_pixbuf;
 
 pub fn pad() -> Box {
     let pad = Box::new("", Horizontal);
@@ -21,4 +22,30 @@ pub fn sep(name: &str) -> Box {
     sep.set_vexpand(false);
 
     sep
+}
+
+pub fn img_box(
+    name: &str,
+    w: i32,
+    h: i32,
+    img_path: &str
+    ) -> Box {
+
+    let img_box = Box::new(name, Horizontal);
+    img_box.set_halign(gtk::Align::Center);
+    img_box.set_valign(gtk::Align::Center);
+
+    let img_pb = gdk_pixbuf::Pixbuf::from_file(
+        img_path
+    ).expect("Image file does not found ToT");
+
+    if let Some(pb) = img_pb.scale_simple(
+        w, h, gdk_pixbuf::InterpType::Bilinear
+    ) {
+        img_box.add(&gtk::Image::builder()
+            .pixbuf(&pb)
+            .build());
+    };
+
+    img_box
 }
