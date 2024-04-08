@@ -8,6 +8,8 @@ use std::process::{
 use std::io::Read;
 
 use async_channel;
+use async_channel::Receiver;
+
 use futures::executor::block_on;
 
 use gtk::glib;
@@ -33,6 +35,38 @@ pub fn spawn_once(command: &str) {
     if let Err(_) = cmd.spawn() {
         println!("Failed to start command");
     }
+}
+
+pub fn spawn_listen(command: &str) -> Receiver<String> {
+    let cmd = String::from(command);
+    let (sender, receiver) = async_channel::unbounded();
+
+    let process = Command::new("sh")
+        .arg("-c")
+        .arg(&cmd)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::null())
+        .spawn()
+        .expect("Failed to start process");
+
+    if let Some(mut stdout) = process.stdout {
+        thread::spawn(move || {
+            block_on(async move {
+                loop {
+                    let mut buf = vec![0; 256];
+                    let _ = stdout.read(&mut buf);
+                    let text = String::from_utf8_lossy(&buf)
+                        .replace("\0", "")
+                        .replace("\n", "");
+
+                    let _ = sender.send(text.to_string()).await;
+                }
+            });
+        });
+    }
+
+    receiver
 }
 
 pub fn poll_label(name: &str, command: &str, timeout: u64) -> gtk::Label {

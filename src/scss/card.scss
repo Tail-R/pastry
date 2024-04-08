@@ -1,0 +1,87 @@
+#card_main {
+    background-color: $bg;
+    border: 1px solid $cyan;
+    padding: 16px;
+}
+
+#card_user_info {
+    #user_name {
+        font-family: "Comic Shanns";
+        font-size: 24px;
+        font-weight: bold;
+        color: $blue;
+        margin-bottom: 4px;
+    }
+
+    #host_name {
+        font-family: "Comic Shanns";
+        font-size: 16px;
+        font-weight: bold;
+        color: $magenta;
+    }
+
+    #term_cols {
+        font-size: 16px;
+
+        #c1 { color: $black; }
+        #c2 { color: $red; }
+        #c3 { color: $green; }
+        #c4 { color: $yellow; }
+        #c5 { color: $blue; }
+        #c6 { color: $magenta; }
+        #c7 { color: $cyan; }
+        #c8 { color: $white; }
+    }
+
+    #uptime {
+        font-size: 16px;
+        font-weight: bold;
+        color: $fg;
+
+        background-color: $cyan;
+        border-radius: 4px;
+        padding: 8px 16px 8px 16px;
+    }
+}
+
+#card_sys_info {
+    #brightness,
+    #volume,
+    #network {
+        min-width: 160px;
+        min-height: 40px;
+
+        font-size: 18px;
+        font-weight: bold;
+        color: $fg;
+
+        border: 1px solid $cyan;
+        padding: 4px 8px 4px 8px;
+    }
+
+    #network {
+        #ap_name{
+            color: $green;
+        }
+    }
+}
+
+#web_bookmarks {
+    #bm1,
+    #bm2,
+    #bm3,
+    #bm4 {
+        font-size: 18px;
+        color: $green;
+    }
+    
+    #bm1:hover,
+    #bm2:hover,
+    #bm3:hover,
+    #bm4:hover {
+        color: $magenta;
+    }
+    
+    background-color: $white;
+    padding: 
+}

@@ -5,17 +5,25 @@ use gtk::prelude::*;
 
 const APP_ID: &str = "org.pastry";
 
+/*
+---------- To-Do ----------
+use DrawingArea instead of GtkImage in img_box()
+*/
+
 fn load_css() {
     let provider = gtk::CssProvider::new();
-    let style = include_bytes!("style.css");
-    
-    provider.load_from_data(style).expect("Failed to load css");
-    
-    gtk::StyleContext::add_provider_for_screen(
-        &gdk::Screen::default().expect("Failed to init css provider"),
-        &provider,
-        gtk::STYLE_PROVIDER_PRIORITY_APPLICATION
-    );
+
+    if let Ok(css) = grass::from_path("style.scss", &grass::Options::default()) {
+        let style: &[u8] = css.as_bytes();
+        
+        if let Ok(_) = provider.load_from_data(style) {
+            gtk::StyleContext::add_provider_for_screen(
+                &gdk::Screen::default().expect("Failed to init css provider"),
+                &provider,
+                gtk::STYLE_PROVIDER_PRIORITY_APPLICATION
+            );
+        }
+    }
 }
 
 fn main() {

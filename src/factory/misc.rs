@@ -24,6 +24,13 @@ pub fn sep(name: &str) -> Box {
     sep
 }
 
+pub fn label(name: &str, label: &str) -> gtk::Label {
+    gtk::Label::builder()
+        .name(name)
+        .label(label)
+        .build()
+}
+
 pub fn img_box(
     name: &str,
     w: i32,
