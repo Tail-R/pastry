@@ -24,8 +24,6 @@ use pastry::factory::{
     },
 };
 
-use std::env;
-
 use gtk::prelude::*;
 use gtk::Orientation::*;
 use gtk::Align::*;
@@ -71,15 +69,16 @@ fn ui_bar(card: Window) -> Box {
 }
 
 fn ui_card() -> Box { 
-    let home = env::var("HOME").unwrap();
-
     Box::new("card_main", Vertical).add_children(vec![
-        Box::new("", Horizontal).homogeneous(true).add_children(vec![
-            img_box("", 160, 160, &(home + "/Pictures/lavender.jpg")),
+        Box::new("card_title", Horizontal),
+        Box::new("card_body", Horizontal).add_children(vec![
+            img_box("pfp_box", 150, 150, &("images/meimei.png")),
             user_info(),
             sys_info(),
         ]),
-        web_bookmarks(),
+        Box::new("card_bottom", Vertical).add_children(vec![
+            web_bookmarks(),
+        ]),
     ])
 }
 
@@ -97,7 +96,7 @@ fn user_info() -> Box {
 
     Box::new("card_user_info", Vertical)
         .valign(Center)
-        .spacing(16)
+        .spacing(8)
         .add_children(vec![
 
         Box::new("", Vertical).add_children(vec![
@@ -107,7 +106,6 @@ fn user_info() -> Box {
         Box::new("term_cols", Horizontal)
             .homogeneous(true)
             .halign(Center)
-            .spacing(0)
             .add_children(
 
             base_8,
@@ -135,8 +133,8 @@ fn sys_info() -> Box {
             label("", "・Brightness"),
             label("", ""),
             Box::new("", Horizontal).add_children(vec![
-                brightness_label(""),
-                label("", "%"),
+                brightness_label("value"),
+                label("icon", "%"),
             ]),
         ),
         
@@ -147,8 +145,8 @@ fn sys_info() -> Box {
             label("", "・Volume"),
             label("", ""),
             Box::new("", Horizontal).add_children(vec![
-                volume_label(""),
-                label("", "%"),
+                volume_label("value"),
+                label("icon", "%"),
             ]),
         ),
 

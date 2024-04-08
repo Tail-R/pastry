@@ -12,9 +12,9 @@
     min-height: 50px;
 
     font-size: 22px;
-    color: $bg;
+    color: $fg;
 
-    background-color: $blue;
+    background: linear-gradient(180deg, $bg, $cyan);
 }
 
 #draw_card:hover {
