@@ -18,7 +18,7 @@ use pastry::factory::{
     },
     misc::{
         label,
-        img_box,
+        img_box_simple,
         pad,
         sep,
     },
@@ -29,8 +29,8 @@ use gtk::Orientation::*;
 use gtk::Align::*;
 
 pub fn build(app: &gtk::Application) {
-    let card = Window::new_widget(app, "card", 70, 20, 0, 0);
-    let bar = Window::new_widget(app, "bar", 0, 0, 50, 1200);
+    let bar = Window::new_widget(app, "", 0, 0, 50, 1200);
+    let card = Window::new_widget(app, "", 70, 20, 0, 0);
  
     bar.add(&ui_bar(card.clone())); 
     bar.show_all();
@@ -59,7 +59,7 @@ fn ui_bar(card: Window) -> Box {
             bat_cap_label(""),
         ]),
         sep("bar_sep"),
-        Box::new("bar_date", Vertical).add_children(vec![
+        Box::new("bar_clock", Vertical).add_children(vec![
             poll_label("", "date +\"%H\"", 30 as u64), 
             label("", "時"),
             poll_label("", "date +\"%M\"", 30 as u64),
@@ -70,9 +70,14 @@ fn ui_bar(card: Window) -> Box {
 
 fn ui_card() -> Box { 
     Box::new("card_main", Vertical).add_children(vec![
-        Box::new("card_title", Horizontal),
-        Box::new("card_body", Horizontal).add_children(vec![
-            img_box("pfp_box", 150, 150, &("images/meimei.png")),
+        Box::new("card_title", Horizontal).homogeneous(true).add_children(vec![
+            poll_label("date", "date +'%A %b %d, %4Y'", 60)
+        ]),
+        Box::new("card_header", Horizontal).homogeneous(true).add_child(
+            pad()
+        ),
+        Box::new("card_body", Horizontal).homogeneous(true).add_children(vec![
+            img_box_simple("pfp_box", 180, 180, &"images/lavender.jpg"),
             user_info(),
             sys_info(),
         ]),
@@ -94,17 +99,28 @@ fn user_info() -> Box {
         label("c8", "■"),
     ];
 
-    Box::new("card_user_info", Vertical)
-        .valign(Center)
-        .spacing(8)
+    Box::new("user_info", Vertical)
+        .homogeneous(true)
         .add_children(vec![
 
-        Box::new("", Vertical).add_children(vec![
-            label("user_name", "Tail-R"), // Hard coding is my beloved (u_u*)
-            label("host_name", &("@".to_string() + &exec_once("cat /etc/hostname"))),
-        ]),
+        Box::new("subtitle", Horizontal).halign(Center).add_child(
+            label("", "Profile")
+        ),
+
+        Box::new("user_name", Horizontal).cerberus(
+            label("", "User"),
+            pad(),
+            label("", "Tail-R"), // Hard coding is my beloved (u_u*)
+        ),
+
+        Box::new("host_name", Horizontal).cerberus(
+            label("", "Host"),
+            pad(),
+            label("", &exec_once("cat /etc/hostname")),
+        ),
+
         Box::new("term_cols", Horizontal)
-            .homogeneous(true)
+            .homogeneous(false)
             .halign(Center)
             .add_children(
 
@@ -112,38 +128,34 @@ fn user_info() -> Box {
         ),
         Box::new("uptime", Vertical)
             .homogeneous(true)
-            .halign(Center)
             .add_child(
 
-            poll_label("", "uptime -p | cut -d ',' -f1", 3600)
+            poll_label("", "uptime -p | cut -d ',' -f1", 60)
         ),
     ])
 }
 
 fn sys_info() -> Box {
-    Box::new("card_sys_info", Vertical)
-        .valign(Center)
-        .spacing(8)
+    Box::new("sys_info", Vertical)
+        .homogeneous(true)
         .add_children(vec![
 
-        Box::new("brightness", Horizontal)
-            .halign(Center)
-            .cerberus(
+        Box::new("subtitle", Horizontal).halign(Center).add_child(
+            label("", "System")
+        ),
 
-            label("", "・Brightness"),
-            label("", ""),
+        Box::new("brightness", Horizontal).cerberus(
+            label("", "Brightness"),
+            pad(),
             Box::new("", Horizontal).add_children(vec![
                 brightness_label("value"),
                 label("icon", "%"),
             ]),
         ),
         
-        Box::new("volume", Horizontal)
-            .halign(Center)
-            .cerberus(
-
-            label("", "・Volume"),
-            label("", ""),
+        Box::new("volume", Horizontal).cerberus(
+            label("", "Volume"),
+            pad(),
             Box::new("", Horizontal).add_children(vec![
                 volume_label("value"),
                 label("icon", "%"),
@@ -151,16 +163,17 @@ fn sys_info() -> Box {
         ),
 
         Box::new("network", Vertical)
-            .halign(Center)
             .valign(Center)
-            .add_children(vec![
-                Box::new("", Horizontal).add_child(
-                    label("", "・Network"),
-                ),
-                Box::new("", Horizontal).homogeneous(true).add_child(
-                    network_label("ap_name"),
-                ),
-            ]),
+            .cerberus(
+
+            Box::new("", Horizontal).add_child(
+                label("", "Network")
+            ),
+            pad(),
+            Box::new("", Horizontal).homogeneous(true).add_child(
+                network_label("ap_name")
+            ),
+        )
     ])
 }
 
@@ -175,13 +188,17 @@ fn web_bookmarks() -> Box {
     for (btn, url) in &bookmarks {
         btn.set_label(url);
     
-        btn.connect_clicked(|_|{
+        btn.connect_clicked(|btn|{
             spawn_once(&("xdg-open ".to_string() + url));
+            if let Some(win) = btn.toplevel() {
+                win.hide();
+            }
         });
     }
 
     Box::new("web_bookmarks", Vertical)
         .homogeneous(true)
+        .spacing(4)
         .add_children(
             bookmarks.into_iter()
                 .map(|(btn, _)| Box::new("", Horizontal).add_child(btn))

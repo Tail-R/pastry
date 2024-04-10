@@ -4,107 +4,113 @@
 }
 
 #card_title {
+    #date {
+        font-size: 20px;
+        color: $fg;
+    }
+
+    padding: 8px;
+}
+
+#card_header {
     min-height: 0px;
 
-    background: linear-gradient(180deg, $bg, $cyan);
+    border-top: 1px solid $fg;
+    border-bottom: 1px solid $fg;
 }
 
 #card_body {
+    #pfp_box {
+    }
+
+    #user_info {
+        #subtitle {
+            font-size: 22px;
+            color: $green;
+        }
+
+        #user_name {
+            font-size: 20px;
+            color: $fg;
+            border-bottom: 1px solid $fg;
+        }
+
+        #host_name {
+            font-size: 20px;
+            color: $fg;
+            border-bottom: 1px solid $fg;
+        }
+
+        #term_cols {
+            #c1 { color: $black; }
+            #c2 { color: $red; }
+            #c3 { color: $green; }
+            #c4 { color: $yellow; }
+            #c5 { color: $blue; }
+            #c6 { color: $magenta; }
+            #c7 { color: $cyan; }
+            #c8 { color: $white; }
+
+            font-size: 14px;
+        }
+
+        #uptime {
+            font-size: 20px;
+            color: $fg;
+
+            background-color: $yellow;
+        }
+
+        border-right: 1px solid $fg;
+        padding: 0px 16px 0px 16px;
+    }
+
+    #sys_info {
+        #subtitle {
+            font-size: 22px;
+            color: $green;
+        }
+
+        #brightness,
+        #volume {
+            font-size: 20px;
+            color: $fg;
+            border-bottom: 1px solid $fg;
+        }
+
+        #network {
+            font-size: 20px;
+            color: $fg;
+        }
+
+        padding: 0px 16px 0px 16px;
+    }
+
     padding: 16px;
 }
 
-#card_user_info {
-    #user_name {
-        font-family: "Comic Shanns";
-        font-size: 24px;
-        font-weight: bold;
-        color: $fg;
-        margin-bottom: 4px;
-    }
-
-    #host_name {
-        font-family: "Comic Shanns";
-        font-size: 16px;
-        font-weight: bold;
-        color: $magenta;
-    }
-
-    #term_cols {
-        font-size: 16px;
-
-        #c1 { color: $black; }
-        #c2 { color: $red; }
-        #c3 { color: $green; }
-        #c4 { color: $yellow; }
-        #c5 { color: $blue; }
-        #c6 { color: $magenta; }
-        #c7 { color: $cyan; }
-        #c8 { color: $white; }
-    }
-
-    #uptime {
-        font-size: 16px;
-        font-weight: bold;
-        color: $fg;
-
-        background-color: $cyan;
-        border-radius: 4px;
-        padding: 8px 16px 8px 16px;
-    }
-
-    border-right: 1px solid $cyan;
-    border-left: 1px solid $cyan;
-    padding: 16px;
-    margin: 0px 16px 0px 16px;
-}
-
-#card_sys_info {
-    #brightness,
-    #volume,
-    #network {
-        min-width: 160px;
-        min-height: 24px;
-
-        font-size: 18px;
-        font-weight: bold;
-        color: $fg;
-
-        border: 1px solid $cyan;
-        padding: 8px;
-    }
-
-    #brightness,
-    #volume {
-        #value,
-        #icon {
+#card_bottom {
+    #web_bookmarks {
+        #bm1,
+        #bm2,
+        #bm3,
+        #bm4 {
+            font-size: 20px;
             color: $green;
+            border-bottom: 1px solid $green;
         }
+
+        #bm1:hover,
+        #bm2:hover,
+        #bm3:hover,
+        #bm4:hover {
+            color: $magenta;
+            border-bottom: 1px solid $magenta;
+        }
+
+        background-color: $white;
+        padding: 16px;
     }
 
-    #network {
-        #ap_name{
-            color: $green;
-        }
-    }
-}
-
-#web_bookmarks {
-    #bm1,
-    #bm2,
-    #bm3,
-    #bm4 {
-        font-size: 18px;
-        color: $green;
-    }
-    
-    #bm1:hover,
-    #bm2:hover,
-    #bm3:hover,
-    #bm4:hover {
-        color: $magenta;
-    }
-    
-    background-color: $white;
-    padding: 8px 16px 8px 16px;
-    margin: 0px 8px 8px 8px;
+    border-top: 1px solid $fg;
 }

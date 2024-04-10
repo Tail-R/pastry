@@ -1,7 +1,3 @@
-#bar {
-    background: transparent;
-}
-
 #bar_main {
     background-color: $bg;
     border-right: 1px solid $cyan;
@@ -35,7 +31,7 @@
     margin: 8px 12px 8px 12px;
 }
 
-#bar_date {
+#bar_clock {
     font-size: 22px;
     font-weight: bold;
     color: $fg;

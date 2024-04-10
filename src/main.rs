@@ -7,7 +7,11 @@ const APP_ID: &str = "org.pastry";
 
 /*
 ---------- To-Do ----------
-use DrawingArea instead of GtkImage in img_box()
+Think of ways to make the configuration more shorter ToT
+I think it's better to load lua or static ML
+and parse it into Rust structures.
+
+add wayland support. it's easy \(u_u*\)
 */
 
 fn load_css() {

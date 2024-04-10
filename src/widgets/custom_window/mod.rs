@@ -35,7 +35,7 @@ impl Window {
         new_window.set_default_size(w, h);
 
         new_window.set_resizable(false);
-        new_window.set_accept_focus(false);
+        new_window.set_accept_focus(true);
 
         new_window.set_skip_pager_hint(true);
         new_window.set_skip_taskbar_hint(true);
