@@ -8,7 +8,7 @@ pub const GET_BR: &str = "
     echo $(($brightness * 100 / $max_brightness)) \
 ";
 
-pub const TRACK_BR: &str = "
+pub const FOLLOW_BR: &str = "
     inotifywait -m -q -e modify /sys/class/backlight/intel_backlight/brightness
 ";
 
@@ -16,10 +16,10 @@ pub const GET_VOL: &str = "
     pamixer --get-volume
 ";
 
-pub const TRACK_VOL: &str = "
+pub const FOLLOW_VOL: &str = "
     pactl subscribe | grep --line-buffered \"Event 'change' on sink\"
 ";
 
-pub const TRACK_NM_STATE: &str = "
+pub const FOLLOW_NM_STATE: &str = "
     dbus-monitor --system \"type='signal',interface='org.freedesktop.NetworkManager'\"
 ";

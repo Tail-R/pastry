@@ -15,6 +15,9 @@ use futures::executor::block_on;
 use gtk::glib;
 use gtk::prelude::*;
 
+// Default buffer size of the shell output
+const BUF_SIZE: usize = 512;
+
 pub fn exec_once(command: &str) -> String {
     let mut shell = Command::new("sh");
     let cmd = shell.arg("-c").arg(command);
@@ -54,7 +57,7 @@ pub fn spawn_listen(command: &str) -> Receiver<String> {
         thread::spawn(move || {
             block_on(async move {
                 loop {
-                    let mut buf = vec![0; 256];
+                    let mut buf = vec![0; BUF_SIZE];
                     let _ = stdout.read(&mut buf);
                     let text = String::from_utf8_lossy(&buf)
                         .replace("\0", "")
@@ -127,7 +130,7 @@ pub fn listen_label(name: &str, command: &str) -> gtk::Label {
     thread::spawn(move || {
         block_on(async move {
             loop {
-                let mut buf = vec![0; 128];
+                let mut buf = vec![0; BUF_SIZE];
                 let _ = stdout.read(&mut buf);
                 let text = String::from_utf8_lossy(&buf)
                     .replace("\0", "")

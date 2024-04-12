@@ -10,10 +10,10 @@ use crate::factory::{
     scripts::{
         GET_BAT_CAP,
         GET_BR,
-        TRACK_BR,
+        FOLLOW_BR,
         GET_VOL,
-        TRACK_VOL,
-        TRACK_NM_STATE,
+        FOLLOW_VOL,
+        FOLLOW_NM_STATE,
     },
 };
 
@@ -75,11 +75,11 @@ fn shell_callback(name: &str, cmd: &str, track_cmd: &str) -> gtk::Label {
 }
 
 pub fn brightness_label(name: &str) -> gtk::Label {
-    shell_callback(name, GET_BR, TRACK_BR)
+    shell_callback(name, GET_BR, FOLLOW_BR)
 }
 
 pub fn volume_label(name: &str) -> gtk::Label {
-    shell_callback(name, GET_VOL, TRACK_VOL)
+    shell_callback(name, GET_VOL, FOLLOW_VOL)
 }
 
 fn get_ap_ssid() -> String {
@@ -106,12 +106,11 @@ fn get_ap_ssid() -> String {
     "Disconnected".to_string()
 }
 
-/* Note that now this function only supports WiFi SSID */
 pub fn network_label(name: &str) -> gtk::Label {
     let label = label(name, &get_ap_ssid());
     let label_clone = label.clone();
 
-    let r = spawn_listen(TRACK_NM_STATE);
+    let r = spawn_listen(FOLLOW_NM_STATE);
 
     glib::MainContext::default().spawn_local(async move {
         while let Ok(_) = r.recv().await {

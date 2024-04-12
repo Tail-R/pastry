@@ -7,6 +7,7 @@ use pastry::widgets::{
 use pastry::factory::{
     shell::{
         poll_label,
+        listen_label,
         exec_once,
         spawn_once,
     },
@@ -25,7 +26,11 @@ use pastry::factory::{
 };
 
 use gtk::prelude::*;
-use gtk::Orientation::*;
+use gtk::Orientation::{
+    Horizontal as H,
+    Vertical as V,
+};
+
 use gtk::Align::*;
 
 pub fn build(app: &gtk::Application) {
@@ -49,17 +54,17 @@ fn ui_bar(card: Window) -> Box {
         }
     });
     
-    Box::new("bar_main", Vertical).add_children(vec![
-        Box::new("", Vertical).add_child(
+    Box::new("bar_main", V).load(vec![
+        Box::new("", V).child(
             btn1,
         ),
         pad(),
-        Box::new("bar_hp", Vertical).add_children(vec![
+        Box::new("bar_hp", V).load(vec![
             label("", "HP"),
             bat_cap_label(""),
         ]),
         sep("bar_sep"),
-        Box::new("bar_clock", Vertical).add_children(vec![
+        Box::new("bar_clock", V).load(vec![
             poll_label("", "date +\"%H\"", 30 as u64), 
             label("", "時"),
             poll_label("", "date +\"%M\"", 30 as u64),
@@ -68,124 +73,72 @@ fn ui_bar(card: Window) -> Box {
     ])
 }
 
-fn ui_card() -> Box { 
-    Box::new("card_main", Vertical).add_children(vec![
-        Box::new("card_title", Horizontal).homogeneous(true).add_children(vec![
-            poll_label("date", "date +'%A %b %d, %4Y'", 60)
-        ]),
-        Box::new("card_header", Horizontal).homogeneous(true).add_child(
-            pad()
+fn ui_card() -> Box {
+    Box::new("card_main", V)
+    .load(vec![
+        Box::new("card_title", V).child(
+            poll_label("clock", "date +'%A %b %d, %4Y'", 60)
         ),
-        Box::new("card_body", Horizontal).homogeneous(true).add_children(vec![
-            img_box_simple("pfp_box", 180, 180, &"images/lavender.jpg"),
+        Box::new("card_body", V).spacing(8).load(vec![
             user_info(),
-            sys_info(),
-        ]),
-        Box::new("card_bottom", Vertical).add_children(vec![
+            system_info(),
             web_bookmarks(),
+        ]),
+        Box::new("card_bottom", V).load(vec![
+            mpris_box()
         ]),
     ])
 }
 
 fn user_info() -> Box {
-    let base_8 = vec![
-        label("c1", "■"),
-        label("c2", "■"),
-        label("c3", "■"),
-        label("c4", "■"),
-        label("c5", "■"),
-        label("c6", "■"),
-        label("c7", "■"),
-        label("c8", "■"),
-    ];
-
-    Box::new("user_info", Vertical)
-        .homogeneous(true)
-        .add_children(vec![
-
-        Box::new("subtitle", Horizontal).halign(Center).add_child(
-            label("", "Profile")
-        ),
-
-        Box::new("user_name", Horizontal).cerberus(
-            label("", "User"),
-            pad(),
-            label("", "Tail-R"), // Hard coding is my beloved (u_u*)
-        ),
-
-        Box::new("host_name", Horizontal).cerberus(
-            label("", "Host"),
-            pad(),
-            label("", &exec_once("cat /etc/hostname")),
-        ),
-
-        Box::new("term_cols", Horizontal)
-            .homogeneous(false)
-            .halign(Center)
-            .add_children(
-
-            base_8,
-        ),
-        Box::new("uptime", Vertical)
-            .homogeneous(true)
-            .add_child(
-
-            poll_label("", "uptime -p | cut -d ',' -f1", 60)
-        ),
-    ])
+    Box::new("user_info", V).cerberus(
+        img_box_simple("", 180, 180, "images/lavender.jpg"),
+        sep(""),
+        label("user_name", &exec_once("echo $USER@$(cat /etc/hostname)"))
+    )
 }
 
-fn sys_info() -> Box {
-    Box::new("sys_info", Vertical)
-        .homogeneous(true)
-        .add_children(vec![
-
-        Box::new("subtitle", Horizontal).halign(Center).add_child(
-            label("", "System")
-        ),
-
-        Box::new("brightness", Horizontal).cerberus(
-            label("", "Brightness"),
-            pad(),
-            Box::new("", Horizontal).add_children(vec![
-                brightness_label("value"),
-                label("icon", "%"),
-            ]),
-        ),
-        
-        Box::new("volume", Horizontal).cerberus(
-            label("", "Volume"),
-            pad(),
-            Box::new("", Horizontal).add_children(vec![
-                volume_label("value"),
-                label("icon", "%"),
-            ]),
-        ),
-
-        Box::new("network", Vertical)
-            .valign(Center)
-            .cerberus(
-
-            Box::new("", Horizontal).add_child(
-                label("", "Network")
+fn system_info() -> Box {
+    Box::new("system_info", V).cerberus(
+        label("subtitle", "System Info"),
+        sep(""),
+        Box::new("", V).load(vec![
+            Box::new("", H).cerberus(
+                label("", "Volume"),
+                pad(),
+                Box::new("", H).cerberus(
+                    volume_label(""),
+                    sep(""),
+                    label("", "%")
+                )
             ),
-            pad(),
-            Box::new("", Horizontal).homogeneous(true).add_child(
-                network_label("ap_name")
+            Box::new("", H).cerberus(
+                label("", "Brightness"),
+                pad(),
+                Box::new("", H).cerberus(
+                    brightness_label(""),
+                    sep(""),
+                    label("", "%")
+                )
             ),
-        )
-    ])
+            Box::new("", H).cerberus(
+                label("", "Network"),
+                pad(),
+                network_label("")
+            ),
+        ])
+    )
 }
 
 fn web_bookmarks() -> Box {
     let bookmarks = vec![
-        (Button::new("bm1"), "https://www.chukyo-u.ac.jp/student-staff/it/cubics/"),
-        (Button::new("bm2"), "https://manabo.cnc.chukyo-u.ac.jp/auth/shibboleth/"),
-        (Button::new("bm3"), "https://github.com/"),
-        (Button::new("bm4"), "https://www.youtube.com/"),
+        (Button::new("bm1"), label("l1", "albo"), "https://www.chukyo-u.ac.jp/student-staff/it/cubics/"),
+        (Button::new("bm2"), label("l2", "manabo"), "https://manabo.cnc.chukyo-u.ac.jp/auth/shibboleth/"),
+        (Button::new("bm3"), label("l3", "github"), "https://github.com/"),
+        (Button::new("bm4"), label("l4", "youtube"), "https://www.youtube.com/"),
     ];
  
-    for (btn, url) in &bookmarks {
+    for (btn, _, url) in &bookmarks {
         btn.set_label(url);
     
         btn.connect_clicked(|btn|{
@@ -196,12 +149,27 @@ fn web_bookmarks() -> Box {
         });
     }
 
-    Box::new("web_bookmarks", Vertical)
-        .homogeneous(true)
-        .spacing(4)
-        .add_children(
-            bookmarks.into_iter()
-                .map(|(btn, _)| Box::new("", Horizontal).add_child(btn))
-                .collect()
-        )
+    Box::new("web_bookmarks", V).cerberus(
+        label("subtitle", "Bookmarks"),
+        sep(""),
+        Box::new("", V)
+            .halign(Center)
+            .spacing(4)
+            .load(
+                bookmarks.into_iter()
+                    .map(|(btn, l, _)| Box::new("", V)
+                        .halign(Start)
+                        .cerberus(
+                            Box::new("", H).child(l),
+                            sep(""),
+                            btn
+                        )
+                    )
+                    .collect()
+            )
+    )
+}
+
+fn mpris_box() -> Box {
+    Box::new("mpris_box", V)
 }

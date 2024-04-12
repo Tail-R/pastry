@@ -16,13 +16,13 @@ impl Box {
             .build()
     }
 
-    pub fn add_child<T: IsA<gtk::Widget>>(&self, child: T) -> Self {
+    pub fn child<T: IsA<gtk::Widget>>(&self, child: T) -> Self {
         self.add(&child);
 
         self.clone()
     }
 
-    pub fn add_children<T: IsA<gtk::Widget>>(&self, children: Vec<T>) -> Self {
+    pub fn load<T: IsA<gtk::Widget>>(&self, children: Vec<T>) -> Self {
         for c in children {
             self.add(&c);
         }

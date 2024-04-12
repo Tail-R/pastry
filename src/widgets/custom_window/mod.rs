@@ -29,7 +29,7 @@ impl Window {
 
         new_window.set_application(Some(app));
         new_window.set_widget_name(name);
-        new_window.set_decorated(true);
+        new_window.set_decorated(false);
 
         new_window.move_(x, y);
         new_window.set_default_size(w, h);

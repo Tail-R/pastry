@@ -57,7 +57,7 @@ pub fn img_box(
         true.into()
     });
 
-    Box::new(name, Horizontal).add_child(drawing_area)
+    Box::new(name, Horizontal).child(drawing_area)
 }
 
 // pub fn img_box_pattern(
@@ -89,7 +89,7 @@ pub fn img_box(
 //         true.into()
 //     });
 // 
-//     Box::new(name, Horizontal).add_child(drawing_area)
+//     Box::new(name, Horizontal).child(drawing_area)
 // }
 
 pub fn img_box_simple(
