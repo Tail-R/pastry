@@ -7,9 +7,7 @@ use std::process::{
 
 use std::io::Read;
 
-use async_channel;
 use async_channel::Receiver;
-
 use futures::executor::block_on;
 
 use gtk::glib;

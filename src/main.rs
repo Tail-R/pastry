@@ -11,7 +11,9 @@ Think of ways to make the configuration more shorter ToT
 I think it's better to load lua or static ML
 and parse it into Rust structures.
 
-add wayland support. it's easy \(u_u*\)
+Add wayland support. it's easy \(u_u*\)
+
+Refactor ugly implementation of the MPRIS art box ~o~
 */
 
 fn load_css() {

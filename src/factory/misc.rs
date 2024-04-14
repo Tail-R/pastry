@@ -92,6 +92,8 @@ pub fn img_box(
 //     Box::new(name, Horizontal).child(drawing_area)
 // }
 
+
+// Easy to use, And works like a zombie OwO
 pub fn img_box_simple(
     name: &str,
     w: i32,
@@ -103,16 +105,14 @@ pub fn img_box_simple(
     img_box.set_halign(gtk::Align::Center);
     img_box.set_valign(gtk::Align::Center);
 
-    let img_pb = gdk_pixbuf::Pixbuf::from_file(
-        img_path
-    ).expect("Image file does not found ToT");
-
-    if let Some(pb) = img_pb.scale_simple(
-        w, h, gdk_pixbuf::InterpType::Bilinear
-    ) {
-        img_box.add(&gtk::Image::builder()
-            .pixbuf(&pb)
-            .build());
+    if let Ok(img_pb) = gdk_pixbuf::Pixbuf::from_file(img_path) {
+        if let Some(pb) = img_pb.scale_simple(
+            w, h, gdk_pixbuf::InterpType::Bilinear
+        ) {
+            img_box.add(&gtk::Image::builder()
+                .pixbuf(&pb)
+                .build());
+        }
     }
 
     img_box

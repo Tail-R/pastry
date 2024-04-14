@@ -4,34 +4,84 @@
 }
 
 #card_title {
+    min-height: 54px;
     background: linear-gradient(180deg, $bg, $cyan);
-    padding: 16px;
+}
+
+#card_body {
+    border-bottom: 1px solid $cyan;
 
     #clock {
         font-size: 20px;
         font-weight: bold;
         color: $fg;
-    }
-}
 
-#card_body {
-    padding: 16px;
+        // background-color: $white;
+        border-bottom: 1px solid $cyan;
+        padding: 16px;
+    }
 
     #user_info {
+        padding: 16px;
+
+        #pfp_box {
+            border: 8px solid $yellow;
+        }
+
         #user_name {
-            font-size: 18px;
+            font-size: 20px;
             color: $fg;
-            margin: 4px;
+        }
+
+        #term_colors {
+            font-size: 18px;
+
+            #c1 {color: $black; } 
+            #c2 {color: $red; }
+            #c3 {color: $green; }
+            #c4 {color: $yellow; }
+            #c5 {color: $blue; }
+            #c6 {color: $magenta; }
+            #c7 {color: $cyan; }
+            #c8 {color: $white; }
+        }
+    }
+
+    #player_info {
+        background-color: $white;
+        padding: 16px 24px 16px 16px;
+        margin: 0px 16px 16px 16px;
+
+        #title,
+        #artist {
+            color: $fg;
+            font-size: 16px;
+        }
+
+        #prev_button,
+        #toggle_button,
+        #next_button {
+            font-size: 16px;
+            font-weight: bold;
+            color: $fg;
+        }
+
+        #prev_button:hover,
+        #toggle_button:hover,
+        #next_button:hover {
+            opacity: 0.75;
         }
     }
 
     #system_info {
-        font-size: 16px;
+        font-size: 18px;
         color: $fg;
-        padding: 8px;
+
+        border-top: 1px solid $cyan;
+        padding: 16px;
 
         #subtitle {
-            font-size: 18px;
+            font-size: 20px;
             color: $fg;
 
             background-color: $yellow;
@@ -41,10 +91,11 @@
     }
 
     #web_bookmarks {
-        padding: 8px;
+        border-top: 1px solid $cyan;
+        padding: 16px;
 
         #subtitle {
-            font-size: 18px;
+            font-size: 20px;
             color: $fg;
 
             background-color: $yellow;
@@ -56,7 +107,7 @@
         #l2,
         #l3,
         #l4 {
-            font-size: 16px;
+            font-size: 18px;
             color: $fg;
         }
         
@@ -64,7 +115,7 @@
         #bm2,
         #bm3,
         #bm4 {
-            font-size: 16px;
+            font-size: 18px;
             color: $green;
             border-bottom: 1px solid $green;
         }
@@ -79,11 +130,6 @@
 }
 
 #card_bottom {
-    #mpris_box {
-        font-size: 16px;
-        color: $fg;
-
-        border-top: 1px solid $cyan;
-        padding: 8px; 
-    }
+    min-height: 16px;
+    background: linear-gradient(180deg, $bg, $cyan);
 }
