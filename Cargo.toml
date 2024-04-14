@@ -15,5 +15,3 @@ futures = "0.3.30"
 
 networkmanager = "0.4"
 dbus = "0.9"
-
-mpris = "2.0.1"
