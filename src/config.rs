@@ -118,7 +118,7 @@ fn user_info() -> Box {
         label("c8", "★"),
     ];
 
-    let pfp_path = "images/satori.jpg";
+    let pfp_path = "images/scarlet.jpg";
     let pfp_h = 180.0;
 
     let cmd = String::from(GET_IMG_GEOMETRY) + pfp_path;

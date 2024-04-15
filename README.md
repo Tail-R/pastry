@@ -1,4 +1,4 @@
 #Pastry
-![20240415_022044](https://github.com/Tail-R/dots/assets/132870183/0011e468-0811-408f-96f4-756308113c47)
+![20240415_161838](https://github.com/Tail-R/pastry/assets/132870183/a8a2c2b7-519f-4880-bca4-f3c5acedb6fc)
 dependencies:
-    inotifywait, pamixer pactl, wmctrl, playerctl
+    inotifywait, pamixer pactl, playerctl
