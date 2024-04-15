@@ -8,6 +8,8 @@
     background-color: $white;
     padding: 16px;
 
+    box-shadow: 0px 1px 2px grey;
+
     #title {
         font-size: 20px;
         font-weight: bold;
@@ -125,4 +127,6 @@
     min-height: 16px;
     // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
+
+    box-shadow: 1px 1px 2px grey;
 }
