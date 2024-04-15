@@ -11,60 +11,16 @@
     color: $fg;
 
     background: linear-gradient(180deg, $bg, $cyan);
+    // background-color: $white;
+    border-bottom: 1px solid $cyan;
 }
 
 #draw_card:hover {
     opacity: 0.75;
 }
 
-#bar_desktops {
-    margin-top: 16px;
-
-    #desktop1,
-    #desktop2,
-    #desktop3,
-    #desktop4,
-    #desktop5,
-    #desktop6,
-    #desktop7,
-    #desktop8,
-    #desktop9,
-    #desktop10,
-    #desktop11,
-    #desktop12,
-    #desktop13,
-    #desktop14,
-    #desktop15,
-    #desktop16,
-    #desktop17 {
-        font-size: 20px;
-        font-weight: bold;
-        color: $fg;
-    }
-
-    #desktop1:hover,
-    #desktop2:hover,
-    #desktop3:hover,
-    #desktop4:hover,
-    #desktop5:hover,
-    #desktop6:hover,
-    #desktop7:hover,
-    #desktop8:hover,
-    #desktop9:hover,
-    #desktop10:hover,
-    #desktop11:hover,
-    #desktop12:hover,
-    #desktop13:hover,
-    #desktop14:hover,
-    #desktop15:hover,
-    #desktop16:hover,
-    #desktop17:hover {
-        opacity: 0.75;
-    }
-}
-
 #bar_hp {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: $fg;
 }
@@ -78,7 +34,7 @@
 }
 
 #bar_clock {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: $fg;
 

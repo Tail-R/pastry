@@ -4,11 +4,19 @@
 }
 
 #card_title {
-    min-height: 54px;
     background: linear-gradient(180deg, $bg, $cyan);
+    // background-color: $white;
+    padding: 16px;
+
+    #title {
+        font-size: 20px;
+        font-weight: bold;
+        color: $fg;
+    }
 }
 
 #card_body {
+    border-top: 1px solid $cyan;
     border-bottom: 1px solid $cyan;
 
     #clock {
@@ -23,10 +31,6 @@
 
     #user_info {
         padding: 16px;
-
-        #pfp_box {
-            border: 8px solid $yellow;
-        }
 
         #user_name {
             font-size: 20px;
@@ -48,28 +52,16 @@
     }
 
     #player_info {
-        background-color: $white;
-        padding: 16px 24px 16px 16px;
-        margin: 0px 16px 16px 16px;
+        min-height: 40px;
+        border-top: 1px solid $cyan;
+        padding: 0px 16px 0px 16px;
 
-        #title,
-        #artist {
-            color: $fg;
-            font-size: 16px;
-        }
-
-        #prev_button,
-        #toggle_button,
-        #next_button {
-            font-size: 16px;
-            font-weight: bold;
-            color: $fg;
-        }
-
-        #prev_button:hover,
-        #toggle_button:hover,
-        #next_button:hover {
-            opacity: 0.75;
+        #player_box {
+            #title,
+            #artist {
+                color: $fg;
+                font-size: 15px;
+            }
         }
     }
 
@@ -132,4 +124,5 @@
 #card_bottom {
     min-height: 16px;
     background: linear-gradient(180deg, $bg, $cyan);
+    // background-color: $white;
 }

@@ -9,7 +9,6 @@ use pastry::helper::{
 };
 
 use pastry::factory::{
-    x11::desktop_box,
     shell::{
         poll_label,
         exec_once,
@@ -22,6 +21,7 @@ use pastry::factory::{
         network_label,
     },
     mpris::player_box,
+    scripts::GET_IMG_GEOMETRY,
     misc::{
         label,
         img_box_simple,
@@ -40,7 +40,7 @@ use gtk::Align::*;
 
 pub fn build(app: &gtk::Application) {
     let bar = Window::new_widget(app, "", 0, 0, 50, 1200);
-    let card = Window::new_widget(app, "", 100, 50, 0, 0);
+    let card = Window::new_widget(app, "", 70, 20, 0, 0);
  
     bar.add(&ui_bar(card.clone())); 
     bar.show_all();
@@ -48,26 +48,6 @@ pub fn build(app: &gtk::Application) {
 }
 
 fn ui_bar(card: Window) -> Box {
-    let label_vector = vec![
-        "ど",
-        "う",
-        "か",
-        "K",
-        "a",
-        "p",
-        "p",
-        "a",
-        "と",
-        "発",
-        "音",
-        "し",
-        "て",
-        "下",
-        "さ",
-        "い",
-        "。",
-    ];
-
     let btn1 = Button::new("draw_card");
     btn1.set_label("★");
      
@@ -83,7 +63,6 @@ fn ui_bar(card: Window) -> Box {
         Box::new("", V).child(
             btn1,
         ),
-        desktop_box("bar_desktops", V, label_vector).spacing(3),
         pad(),
         Box::new("bar_hp", V).load(vec![
             label("", "HP"),
@@ -102,11 +81,18 @@ fn ui_bar(card: Window) -> Box {
 fn ui_card() -> Box {
     Box::new("card_main", V)
     .load(vec![
-        Box::new("card_title", V),
+        Box::new("card_title", H)
+            .spacing(16)
+            .cerberus(
+
+            img_box_simple("", 22, 22, "images/gtk.svg"),
+            label("title", "まいぱねる"),
+            sep("")
+        ),
         Box::new("card_body", V).load(vec![
             date(),
             user_info(),
-            player_box("player_info"),
+            player_info(),
             system_info(),
             web_bookmarks(),
         ]),
@@ -132,11 +118,31 @@ fn user_info() -> Box {
         label("c8", "★"),
     ];
 
+    let pfp_path = "images/satori.jpg";
+    let pfp_h = 180.0;
+
+    let cmd = String::from(GET_IMG_GEOMETRY) + pfp_path;
+    let out = exec_once(&cmd);
+    let geom: Vec<&str> = out.split(" ").collect();
+
+    let (w, h) = match geom.len() {
+        2 => {
+            (
+                geom[0].parse::<f64>().unwrap_or(0.0),
+                geom[1].parse::<f64>().unwrap_or(0.0)
+            )
+        }
+        _ => (0.0, 0.0),
+    };
+
+    let ratio: f64 = w / h;
+    let pfp_w = ratio * pfp_h;
+
     Box::new("user_info", V)
         .spacing(8)
         .cerberus(
 
-        img_box_simple("pfp_box", 180, 180, "images/tsukasa.jpg"),
+        img_box_simple("", pfp_w as i32, pfp_h as i32, pfp_path),
         label("user_name", &exec_once("echo $USER@$(cat /etc/hostname)")),
         Box::new("term_colors", H)
             .halign(Center)
@@ -144,6 +150,16 @@ fn user_info() -> Box {
 
             colors
         )
+    )
+}
+
+fn player_info() -> Box {
+    Box::new("player_info", V).child(
+        gtk::ScrolledWindow::builder()
+            .hexpand(true)
+            .vexpand(true)
+            .child(&player_box("player_box"))
+            .build()
     )
 }
 
@@ -188,7 +204,7 @@ fn web_bookmarks() -> Box {
     ];
  
     for (btn, _, url) in &bookmarks {
-        btn.set_label(&get_substring(url, 47));
+        btn.set_label(&get_substring(url, 42));
     
         btn.connect_clicked(|btn|{
             spawn_once(&("xdg-open ".to_string() + url));

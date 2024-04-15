@@ -12,8 +12,6 @@ I think it's better to load lua or static ML
 and parse it into Rust structures.
 
 Add wayland support. it's easy \(u_u*\)
-
-Refactor ugly implementation of the MPRIS art box ~o~
 */
 
 fn load_css() {

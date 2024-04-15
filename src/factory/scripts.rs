@@ -37,7 +37,7 @@ pub const MPRIS_NEXT: &str = "
 ";
 
 pub const FOLLOW_MPRIS_METADATA: &str = "
-    playerctl -F metadata -f '{{xesam:title}}%sep%{{xesam:artist}}%sep%{{mpris:artUrl}}'
+    playerctl -F metadata -f '{{xesam:title}}%sep%{{xesam:artist}}'
 ";
 
 pub const GET_IMG_GEOMETRY: &str = "identify -format '%w %h' ";
