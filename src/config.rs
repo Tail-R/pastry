@@ -108,14 +108,22 @@ fn date() -> Box {
 
 fn user_info() -> Box {
     let colors = vec![
-        label("c1", "★"),
-        label("c2", "★"),
-        label("c3", "★"),
-        label("c4", "★"),
-        label("c5", "★"),
-        label("c6", "★"),
-        label("c7", "★"),
-        label("c8", "★"),
+        // label("c1", "★"),
+        // label("c2", "★"),
+        // label("c3", "★"),
+        // label("c4", "★"),
+        // label("c5", "★"),
+        // label("c6", "★"),
+        // label("c7", "★"),
+        // label("c8", "★"),
+
+        label("c1", "◆"),
+        label("c2", "◆"),
+        label("c3", "◆"),
+        label("c4", "◆"),
+        label("c5", "◆"),
+        label("c6", "◆"),
+        label("c7", "◆"),
     ];
 
     let pfp_path = "images/scarlet.jpg";

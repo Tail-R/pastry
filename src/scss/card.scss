@@ -4,8 +4,8 @@
 }
 
 #card_title {
-    background: linear-gradient(180deg, $bg, $cyan);
-    // background-color: $white;
+    // background: linear-gradient(180deg, $bg, $cyan);
+    background-color: $white;
     padding: 16px;
 
     #title {
@@ -60,7 +60,7 @@
             #title,
             #artist {
                 color: $fg;
-                font-size: 15px;
+                font-size: 18px;
             }
         }
     }
@@ -123,6 +123,6 @@
 
 #card_bottom {
     min-height: 16px;
-    background: linear-gradient(180deg, $bg, $cyan);
-    // background-color: $white;
+    // background: linear-gradient(180deg, $bg, $cyan);
+    background-color: $white;
 }
