@@ -4,9 +4,7 @@ use crate::factory::{
         spawn_once,
         spawn_listen,
     },
-    misc::{
-        label,
-    },
+    misc::label,
     scripts::{
         GET_BAT_CAP,
         GET_BR,

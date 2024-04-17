@@ -41,9 +41,11 @@ pub fn build(app: &gtk::Application) {
     let bar = Window::new_widget(app, "", 0, 0, 50, 1200);
     let card = Window::new_widget(app, "", 70, 20, 0, 0);
  
-    bar.add(&ui_bar(card.clone())); 
+    bar.child(ui_bar(card.clone()));
     bar.show_all();
-    card.add(&ui_card());
+
+
+    card.child(ui_card());
 }
 
 fn ui_bar(card: Window) -> Box {
@@ -80,8 +82,7 @@ fn ui_bar(card: Window) -> Box {
 }
 
 fn ui_card() -> Box {
-    Box::new("card_main", V)
-    .load(vec![
+    Box::new("card_main", V).load(vec![
         Box::new("card_title", H)
             .spacing(16)
             .cerberus(
@@ -90,14 +91,16 @@ fn ui_card() -> Box {
             label("title", "まいぱねる"),
             sep("")
         ),
-        Box::new("card_body", H).load(vec![
+        Box::new("card_body", H)
+            .homogeneous(true)
+            .load(vec![
+
             Box::new("", V).load(vec![
                 date(),
                 user_info(),
                 player_info(),
                 system_info(),
             ]),
-            sep("sep"),
             Box::new("", V).load(vec![
                 web_bookmarks(),
             ]),
@@ -226,21 +229,22 @@ fn web_bookmarks() -> Box {
 
     Box::new("web_bookmarks", V).cerberus(
         label("subtitle", "Bookmarks"),
-        sep(""),
-        Box::new("", V)
-            .halign(Center)
-            .spacing(4)
-            .load(
-                bookmarks.into_iter()
-                    .map(|(btn, l, _)| Box::new("", V)
-                        .halign(Start)
-                        .cerberus(
-                            Box::new("", H).child(l),
-                            sep(""),
-                            btn
-                        )
-                    )
-                    .collect()
-            )
+        Scroll::new("scroll").child(
+            Box::new("", V)
+                .halign(Center)
+                .spacing(4)
+                .load(
+                    bookmarks.into_iter()
+                        .map(|(btn, l, _)| Box::new("", V)
+                            .halign(Start)
+                            .cerberus(
+                                Box::new("", H).child(l),
+                                sep(""),
+                                btn
+                            )
+                        ).collect()
+                )
+        ),
+        sep("")
     )
 }

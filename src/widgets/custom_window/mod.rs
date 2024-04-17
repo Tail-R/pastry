@@ -44,4 +44,10 @@ impl Window {
  
         new_window
     }
+
+    pub fn child<T: IsA<gtk::Widget>>(&self, child: T) -> Self {
+        self.add(&child);
+
+        self.clone()
+    }
 }

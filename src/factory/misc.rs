@@ -60,39 +60,6 @@ pub fn img_box(
     Box::new(name, Horizontal).child(drawing_area)
 }
 
-// pub fn img_box_pattern(
-//     name: &str,
-//     w: f64,
-//     h: f64,
-//     img_path: &str
-//     ) -> Box {
-// 
-//     let x = 0;
-//     let y = 0;
-// 
-//     let drawing_area = gtk::DrawingArea::builder()
-//         .hexpand(true)
-//         .vexpand(true)
-//         .build();
-// 
-//     let img_pb = gdk_pixbuf::Pixbuf::from_file(
-//         img_path
-//     ).expect("Image file does not found ToT");
-// 
-//     drawing_area.connect_draw(move |_, cr| {
-//         // cr.scale(w, h);
-//         // cr.set_source_pixbuf(&img_pb, x.into(), y.into());
-//         // let _ = cr.paint();
-// 
-//         // let pattern_surface = gtk::cairo::Surface();
-// 
-//         true.into()
-//     });
-// 
-//     Box::new(name, Horizontal).child(drawing_area)
-// }
-
-
 // Easy to use, And works like a zombie OwO
 pub fn img_box_simple(
     name: &str,

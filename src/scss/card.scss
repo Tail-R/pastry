@@ -85,13 +85,9 @@
         }
     }
 
-    #sep {
-        min-width: 1px;
-        background-color: $cyan;
-    }
-
     #web_bookmarks {
         padding: 24px;
+        border-left: 1px solid $cyan;
 
         #subtitle {
             font-size: 20px;
