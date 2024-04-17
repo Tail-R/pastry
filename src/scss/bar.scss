@@ -1,6 +1,6 @@
 #bar_main {
     background-color: $bg;
-    border-right: 1px solid $cyan;
+    border-right: 2px solid $cyan;
 }
 
 #draw_card {
@@ -12,7 +12,6 @@
 
     // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
-    border-bottom: 1px solid $cyan;
 
     border-right: 1px solid darkgrey;
     border-bottom: 1px solid darkgrey;
@@ -23,7 +22,7 @@
 }
 
 #bar_pad {
-    border-top: 1px solid $cyan;
+    border-top: 2px solid $cyan;
 }
 
 #bar_hp {

@@ -124,6 +124,7 @@ fn user_info() -> Box {
         label("c5", "◆"),
         label("c6", "◆"),
         label("c7", "◆"),
+        label("c8", "◆"),
     ];
 
     let pfp_path = "images/scarlet.jpg";
@@ -213,6 +214,7 @@ fn web_bookmarks() -> Box {
         (Button::new("bm"), label("l", "keep"), "https://keep.google.com"),
         (Button::new("bm"), label("l", "reddit"), "https://www.reddit.com"),
         (Button::new("bm"), label("l", "discord"), "https://discord.com"),
+        (Button::new("bm"), label("l", "spotify"), "https://open.spotify.com"),
         (Button::new("bm"), label("l", "pinterest"), "https://www.pinterest.jp"),
     ];
  

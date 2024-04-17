@@ -1,6 +1,6 @@
 #card_main {
     background-color: $bg;
-    border: 1px solid $cyan;
+    border: 2px solid $cyan;
 }
 
 #card_title {
@@ -19,8 +19,8 @@
 }
 
 #card_body {
-    border-top: 1px solid $cyan;
-    border-bottom: 1px solid $cyan;
+    border-top: 2px solid $cyan;
+    border-bottom: 2px solid $cyan;
 
     #clock {
         font-size: 20px;
@@ -28,7 +28,7 @@
         color: $fg;
 
         // background-color: $white;
-        border-bottom: 1px solid $cyan;
+        border-bottom: 2px solid $cyan;
         padding: 16px;
     }
 
@@ -43,20 +43,20 @@
         #term_colors {
             font-size: 18px;
 
-            #c1 {color: $black; } 
-            #c2 {color: $red; }
-            #c3 {color: $green; }
-            #c4 {color: $yellow; }
-            #c5 {color: $blue; }
-            #c6 {color: $magenta; }
-            #c7 {color: $cyan; }
-            #c8 {color: $white; }
+            #c1 {color: $ft1; } 
+            #c2 {color: $ft2; }
+            #c3 {color: $ft3; }
+            #c4 {color: $ft4; }
+            #c5 {color: $ft5; }
+            #c6 {color: $ft6; }
+            #c7 {color: $ft7; }
+            #c8 {color: $ft8; }
         }
     }
 
     #player_info {
         min-height: 40px;
-        border-top: 1px solid $cyan;
+        border-top: 2px solid $cyan;
         padding: 0px 16px 0px 16px;
 
         #player_box {
@@ -72,7 +72,7 @@
         font-size: 18px;
         color: $fg;
 
-        border-top: 1px solid $cyan;
+        border-top: 2px solid $cyan;
         padding: 24px;
 
         #subtitle {
@@ -87,7 +87,7 @@
 
     #web_bookmarks {
         padding: 24px;
-        border-left: 1px solid $cyan;
+        border-left: 2px solid $cyan;
 
         #subtitle {
             font-size: 20px;
