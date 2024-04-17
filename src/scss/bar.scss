@@ -14,11 +14,16 @@
     background-color: $white;
     border-bottom: 1px solid $cyan;
 
-    box-shadow: 1px 1px 2px grey;
+    border-right: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
 }
 
 #draw_card:hover {
     opacity: 0.75;
+}
+
+#bar_pad {
+    border-top: 1px solid $cyan;
 }
 
 #bar_hp {

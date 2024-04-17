@@ -17,7 +17,7 @@ impl Button {
         new_button
     }
 
-    pub fn add_child<T: IsA<gtk::Widget>>(&self, child: T) -> Self {
+    pub fn child<T: IsA<gtk::Widget>>(&self, child: T) -> Self {
         self.add(&child);
 
         self.clone()

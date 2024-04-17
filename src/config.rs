@@ -2,11 +2,10 @@ use pastry::widgets::{
     custom_window::Window,
     custom_box::Box,
     custom_button::Button,
+    custom_scroll::Scroll,
 };
 
-use pastry::helper::{
-    get_substring,
-};
+use pastry::helper::get_substring;
 
 use pastry::factory::{
     shell::{
@@ -63,7 +62,9 @@ fn ui_bar(card: Window) -> Box {
         Box::new("", V).child(
             btn1,
         ),
-        pad(),
+        Box::new("bar_pad", V)
+            .hexpand(true)
+            .vexpand(true),
         Box::new("bar_hp", V).load(vec![
             label("", "HP"),
             bat_cap_label(""),
@@ -89,12 +90,17 @@ fn ui_card() -> Box {
             label("title", "まいぱねる"),
             sep("")
         ),
-        Box::new("card_body", V).load(vec![
-            date(),
-            user_info(),
-            player_info(),
-            system_info(),
-            web_bookmarks(),
+        Box::new("card_body", H).load(vec![
+            Box::new("", V).load(vec![
+                date(),
+                user_info(),
+                player_info(),
+                system_info(),
+            ]),
+            sep("sep"),
+            Box::new("", V).load(vec![
+                web_bookmarks(),
+            ]),
         ]),
         Box::new("card_bottom", V),
     ])
@@ -108,15 +114,6 @@ fn date() -> Box {
 
 fn user_info() -> Box {
     let colors = vec![
-        // label("c1", "★"),
-        // label("c2", "★"),
-        // label("c3", "★"),
-        // label("c4", "★"),
-        // label("c5", "★"),
-        // label("c6", "★"),
-        // label("c7", "★"),
-        // label("c8", "★"),
-
         label("c1", "◆"),
         label("c2", "◆"),
         label("c3", "◆"),
@@ -136,11 +133,11 @@ fn user_info() -> Box {
     let (w, h) = match geom.len() {
         2 => {
             (
-                geom[0].parse::<f64>().unwrap_or(0.0),
-                geom[1].parse::<f64>().unwrap_or(0.0)
+                geom[0].parse::<f64>().unwrap_or(1.0),
+                geom[1].parse::<f64>().unwrap_or(1.0)
             )
         }
-        _ => (0.0, 0.0),
+        _ => (1.0, 1.0),
     };
 
     let ratio: f64 = w / h;
@@ -163,11 +160,9 @@ fn user_info() -> Box {
 
 fn player_info() -> Box {
     Box::new("player_info", V).child(
-        gtk::ScrolledWindow::builder()
-            .hexpand(true)
-            .vexpand(true)
-            .child(&player_box("player_box"))
-            .build()
+        Scroll::new("").child(
+            player_box("player_box")
+        )
     )
 }
 
@@ -204,15 +199,22 @@ fn system_info() -> Box {
 }
 
 fn web_bookmarks() -> Box {
+    let bookmark_max_len = 32;
+
     let bookmarks = vec![
-        (Button::new("bm1"), label("l1", "university"), "https://www.chukyo-u.ac.jp/student-staff/it/cubics/"),
-        (Button::new("bm2"), label("l2", "class"), "https://manabo.cnc.chukyo-u.ac.jp/auth/shibboleth/"),
-        (Button::new("bm3"), label("l3", "github"), "https://github.com/"),
-        (Button::new("bm4"), label("l4", "youtube"), "https://www.youtube.com/"),
+        (Button::new("bm"), label("l", "university"), "https://www.chukyo-u.ac.jp/student-staff/it/cubics"),
+        (Button::new("bm"), label("l", "class"), "https://manabo.cnc.chukyo-u.ac.jp/auth/shibboleth"),
+        (Button::new("bm"), label("l", "github"), "https://github.com"),
+        (Button::new("bm"), label("l", "youtube"), "https://www.youtube.com"),
+        (Button::new("bm"), label("l", "gdrive"), "https://drive.google.com"),
+        (Button::new("bm"), label("l", "keep"), "https://keep.google.com"),
+        (Button::new("bm"), label("l", "reddit"), "https://www.reddit.com"),
+        (Button::new("bm"), label("l", "discord"), "https://discord.com"),
+        (Button::new("bm"), label("l", "pinterest"), "https://www.pinterest.jp"),
     ];
  
     for (btn, _, url) in &bookmarks {
-        btn.set_label(&get_substring(url, 42));
+        btn.set_label(&get_substring(url, bookmark_max_len));
     
         btn.connect_clicked(|btn|{
             spawn_once(&("xdg-open ".to_string() + url));

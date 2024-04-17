@@ -8,7 +8,8 @@
     background-color: $white;
     padding: 16px;
 
-    box-shadow: 0px 1px 2px grey;
+    border-right: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
 
     #title {
         font-size: 20px;
@@ -32,7 +33,7 @@
     }
 
     #user_info {
-        padding: 16px;
+        padding: 24px;
 
         #user_name {
             font-size: 20px;
@@ -84,8 +85,12 @@
         }
     }
 
+    #sep {
+        min-width: 1px;
+        background-color: $cyan;
+    }
+
     #web_bookmarks {
-        border-top: 1px solid $cyan;
         padding: 24px;
 
         #subtitle {
@@ -97,27 +102,18 @@
             padding: 4px;
         }
 
-        #l1,
-        #l2,
-        #l3,
-        #l4 {
+        #l {
             font-size: 18px;
             color: $fg;
         }
         
-        #bm1,
-        #bm2,
-        #bm3,
-        #bm4 {
+        #bm {
             font-size: 18px;
             color: $green;
             border-bottom: 1px solid $green;
         }
         
-        #bm1:hover,
-        #bm2:hover,
-        #bm3:hover,
-        #bm4:hover {
+        #bm:hover {
             color: $cyan;
         }
     }
@@ -128,5 +124,6 @@
     // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
 
-    box-shadow: 1px 1px 2px grey;
+    border-right: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
 }
