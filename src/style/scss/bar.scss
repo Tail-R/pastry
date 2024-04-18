@@ -10,11 +10,12 @@
     font-size: 22px;
     color: $fg;
 
-    // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
 
-    border-right: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey;
+    border-top: 1px solid snow;
+    border-right: 1px solid $x11grey;
+    border-bottom: 1px solid $x11grey;
+    border-left: 1px solid snow;
 }
 
 #draw_card:hover {

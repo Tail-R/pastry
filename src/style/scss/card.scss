@@ -4,12 +4,13 @@
 }
 
 #card_title {
-    // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
     padding: 16px;
 
-    border-right: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey;
+    border-top: 1px solid $snow;
+    border-right: 1px solid $x11grey;
+    border-bottom: 1px solid $x11grey;
+    border-left: 1px solid $snow;
 
     #title {
         font-size: 20px;
@@ -24,10 +25,8 @@
 
     #clock {
         font-size: 20px;
-        font-weight: bold;
         color: $fg;
 
-        // background-color: $white;
         border-bottom: 2px solid $cyan;
         padding: 16px;
     }
@@ -43,14 +42,14 @@
         #term_colors {
             font-size: 18px;
 
-            #c1 {color: $ft1; } 
-            #c2 {color: $ft2; }
-            #c3 {color: $ft3; }
-            #c4 {color: $ft4; }
-            #c5 {color: $ft5; }
-            #c6 {color: $ft6; }
-            #c7 {color: $ft7; }
-            #c8 {color: $ft8; }
+            #c1 {color: $gem1; } 
+            #c2 {color: $gem2; }
+            #c3 {color: $gem3; }
+            #c4 {color: $gem4; }
+            #c5 {color: $gem5; }
+            #c6 {color: $gem6; }
+            #c7 {color: $gem7; }
+            #c8 {color: $gem8; }
         }
     }
 
@@ -117,9 +116,10 @@
 
 #card_bottom {
     min-height: 16px;
-    // background: linear-gradient(180deg, $bg, $cyan);
     background-color: $white;
 
-    border-right: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey;
+    border-top: 1px solid snow;
+    border-right: 1px solid $x11grey;
+    border-bottom: 1px solid $x11grey;
+    border-left: 1px solid snow;
 }
