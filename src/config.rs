@@ -37,7 +37,7 @@ use gtk::Orientation::{
 
 use gtk::Align::*;
 
-pub fn build(app: &gtk::Application) {
+pub fn build(app: &gtk::Application, cfg_dir: Option<String>) {
     let bar = Window::new_widget(app, "", 0, 0, 50, 1200);
     let card = Window::new_widget(app, "", 70, 20, 0, 0);
  
@@ -45,7 +45,7 @@ pub fn build(app: &gtk::Application) {
     bar.show_all();
 
 
-    card.child(ui_card());
+    card.child(ui_card(cfg_dir));
 }
 
 fn ui_bar(card: Window) -> Box {
@@ -81,13 +81,18 @@ fn ui_bar(card: Window) -> Box {
     ])
 }
 
-fn ui_card() -> Box {
+fn ui_card(cfg_dir: Option<String>) -> Box {
+    let d = cfg_dir.expect("There are no given configuration file");
+
+    let app_icon = d.clone() + "/images/gtk.svg";
+    let pfp = d.clone() + "/images/scarlet.jpg";
+
     Box::new("card_main", V).load(vec![
         Box::new("card_title", H)
             .spacing(16)
             .cerberus(
 
-            img_box_simple("", 22, 22, "images/gtk.svg"),
+            img_box_simple("", 22, 22, &app_icon),
             label("title", "まいぱねる"),
             sep("")
         ),
@@ -97,7 +102,7 @@ fn ui_card() -> Box {
 
             Box::new("", V).load(vec![
                 date(),
-                user_info(),
+                user_info(pfp),
                 player_info(),
                 system_info(),
             ]),
@@ -115,7 +120,7 @@ fn date() -> Box {
     )
 }
 
-fn user_info() -> Box {
+fn user_info(pfp: String) -> Box {
     let colors = vec![
         label("c1", "◆"),
         label("c2", "◆"),
@@ -127,7 +132,7 @@ fn user_info() -> Box {
         label("c8", "◆"),
     ];
 
-    let pfp_path = "images/scarlet.jpg";
+    let pfp_path = &pfp;
     let pfp_h = 180.0;
 
     let cmd = String::from(GET_IMG_GEOMETRY) + pfp_path;

@@ -18,13 +18,11 @@ Add wayland support. it's easy \(u_u*\)
 Accept custom options from the command line
 */
 
-fn load_css(path: Option<String>) {
-    let style_target = match path {
-        Some(cfg_dir) => format!("{}/{}", cfg_dir, STYLE_NAME),
+fn load_css(cfg_dir: Option<String>) {
+    let style_target = match cfg_dir {
+        Some(d) => format!("{}/{}", d, STYLE_NAME),
         None => STYLE_NAME.to_string()
     };
-
-    dbg!(&style_target);
 
     let provider = gtk::CssProvider::new();
 
@@ -50,7 +48,7 @@ fn main() {
     // Activation that without path arguments
     // It doesn't load style seat
     app.connect_activate(|app| {
-        config::build(app);
+        config::build(app, None);
     });
  
     // If a configuration directory is given, open signal will be emitted
@@ -62,11 +60,12 @@ fn main() {
             _ => panic!("Invalid number of parameters")
         };
 
-        if let Some(path) = path_buf.to_str() {
-            load_css(Some(path.to_string()));
-        };
+        let cfg_dir = String::from(
+            path_buf.to_str().expect("Failed to convert path to str")
+        );
 
-        config::build(app);
+        load_css(Some(cfg_dir.clone()));
+        config::build(app, Some(cfg_dir.clone()));
     });
 
     app.run();
