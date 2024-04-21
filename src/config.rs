@@ -82,7 +82,7 @@ fn ui_bar(card: Window) -> Box {
 }
 
 fn ui_card(cfg_dir: Option<String>) -> Box {
-    let d = cfg_dir.expect("There are no given configuration file");
+    let d = cfg_dir.expect("There is no given configuration directory");
 
     let app_icon = d.clone() + "/images/gtk.svg";
     let pfp = d.clone() + "/images/scarlet.jpg";
@@ -215,8 +215,9 @@ fn web_bookmarks() -> Box {
         (Button::new("bm"), label("l", "class"), "https://manabo.cnc.chukyo-u.ac.jp/auth/shibboleth"),
         (Button::new("bm"), label("l", "github"), "https://github.com"),
         (Button::new("bm"), label("l", "youtube"), "https://www.youtube.com"),
-        (Button::new("bm"), label("l", "gdrive"), "https://drive.google.com"),
+        (Button::new("bm"), label("l", "drive"), "https://drive.google.com"),
         (Button::new("bm"), label("l", "keep"), "https://keep.google.com"),
+        (Button::new("bm"), label("l", "cloud latex"), "https://cloudlatex.io/projects"),
         (Button::new("bm"), label("l", "reddit"), "https://www.reddit.com"),
         (Button::new("bm"), label("l", "discord"), "https://discord.com"),
         (Button::new("bm"), label("l", "spotify"), "https://open.spotify.com"),

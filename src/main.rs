@@ -35,8 +35,12 @@ fn load_css(cfg_dir: Option<String>) {
                 &provider,
                 gtk::STYLE_PROVIDER_PRIORITY_APPLICATION
             );
+
+            return
         }
     }
+
+    eprintln!("Failed to load style sheet");
 }
 
 fn main() {
@@ -46,7 +50,7 @@ fn main() {
     );
 
     // Activation that without path arguments
-    // It doesn't load style seat
+    // It doesn't load style sheet
     app.connect_activate(|app| {
         config::build(app, None);
     });
